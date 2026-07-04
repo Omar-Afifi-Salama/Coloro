@@ -3,11 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage - Coloro</title>
+    <title>Coloro - Intelligent Color Palettes for Developers</title>
+    <link rel="stylesheet" href="css/css-reset.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Coloro - Homepage</h1>
-    <a href="app.html" class="button">Launch App</a>
+    <header>
+        <nav>
+            <h1 class="logo">Coloro</h1>
+            <ul class="nav-links">
+                <li><a href="index.html" aria-current="true">Home</a></li>
+                <li><a href="app.html">App</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="hero-wrapper">
+        <section class="hero-content">
+            <span class="badge">Built for Developers & Designers</span>
+            <h2 class="hero-title">Intelligent color arrays, calculated programmatically.</h2>
+            <p class="hero-subtitle">
+                Stop guessing hex codes. Input any color format and generate mathematically harmonious palette
+                combinations—complete with names, contrast metrics, and an active sandbox canvas preview instantly.
+            </p>
+            <div class="cta-group">
+                <a href="app.html" class="button primary-btn">Launch App →</a>
+                <a href="#features" class="button secondary-btn">Explore Architecture</a>
+            </div>
+        </section>
+
+        <section class="hero-visual">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mockup-body">
+                    <div class="mockup-row">
+                        <div class="swatch-pill"></div>
+                        <div class="swatch-pill"></div>
+                        <div class="swatch-pill"></div>
+                        <div class="swatch-pill"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="features" class="wrapper features-grid">
+        <div class="feature-card">
+            <h3>Smart Parsing Engine</h3>
+            <p>Paste Hex, RGB, or HSL strings directly. The engine resolves inputs seamlessly with bulletproof error
+                fallbacks.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Dynamic Lightness Aware</h3>
+            <p>Monochromatic spectrums intelligently adjust tint and shade density scales based on where your base color
+                sits natively.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Database Verified</h3>
+            <p>Queries structural repositories instantly to locate and assign the nearest genuine contextual color name
+                token mappings.</p>
+        </div>
+    </section>
 </body>
 </html>
