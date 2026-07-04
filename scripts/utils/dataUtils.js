@@ -1,3 +1,4 @@
+import { Color } from "../models/Color.js";
 import { hexToRgb } from "./colorUtils.js";
 
 let colorDB = null;
@@ -10,14 +11,14 @@ export async function loadDatabase() {
     return colorDB; // Optional, just in case
 }
 
-export function getClosestColorName(targetHex) {
+export function getClosestColorName(color) {
 
     if (!colorDB) {
         console.warn("Database not loaded yet!");
         return "Unknown Color";
     }
 
-    const targetRgb = hexToRgb(targetHex);
+    const targetRgb = color.toRgb();
 
     let closestName = null;
     let minDistanceSq = Infinity;

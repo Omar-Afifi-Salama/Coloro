@@ -1,0 +1,368 @@
+@font-face {
+    font-family: "Google Sans";
+    src: local("Google Sans"),
+        url("../fonts/GoogleSans-Regular.woff2") format("woff2 supports variations"),
+        url("../fonts/GoogleSans-Regular.woff2") format("woff2-variations");
+
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Google Sans";
+    src: local("Google Sans Italic"), local("Google Sans-Italic"),
+        url("../fonts/GoogleSans-Italic.woff2") format("woff2 supports variations") url("../fonts/GoogleSans-Italic.woff2") format("woff2-variations");
+
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+:root {
+    /* ==========================================================================
+       1. THE FONT FAMILY
+       ========================================================================== */
+    --font-main: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", Ubuntu Mono, Menlo, monospace;
+
+    /* ==========================================================================
+       2. FLUID TYPOGRAPHY SCALE (Min-Max range using CSS clamp)
+       ========================================================================== */
+    /* clamp(minimum_size, fluid_preferred_value, maximum_size)
+       This automatically scales smoothly based on the screen width!
+    */
+    --text-xs: clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem);
+    /* 12px - 14px */
+    --text-sm: clamp(0.875rem, 0.83rem + 0.22vw, 1.00rem);
+    /* 14px - 16px (Body small) */
+    --text-base: clamp(1.00rem, 0.96rem + 0.22vw, 1.125rem);
+    /* 16px - 18px (Standard Body) */
+    --text-md: clamp(1.25rem, 1.18rem + 0.33vw, 1.44rem);
+    /* 20px - 23px (H3 / Card titles) */
+    --text-lg: clamp(1.56rem, 1.47rem + 0.49vw, 1.80rem);
+    /* 25px - 28px (H2 / Section heads) */
+    --text-xl: clamp(1.95rem, 1.82rem + 0.70vw, 2.30rem);
+    /* 31px - 36px (H1 / Page Title) */
+    --text-xxl: clamp(2.44rem, 2.23rem + 1.05vw, 3.00rem);
+    /* 39px - 48px (Hero Displays) */
+
+    /* ==========================================================================
+       3. FONT WEIGHT AXIS (Optimized for your Variable Font!)
+       ========================================================================== */
+    --weight-light: 300;
+    --weight-normal: 400;
+    --weight-medium: 550;
+    /* Variable fonts allow exact midpoint custom weights! */
+    --weight-semibold: 650;
+    --weight-bold: 750;
+    --weight-black: 900;
+
+    /* ==========================================================================
+       4. LINE HEIGHTS (Leading)
+       ========================================================================== */
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    /* For large headings */
+    --leading-snug: 1.4;
+    /* For card elements / small descriptions */
+    --leading-normal: 1.6;
+    /* For standard readable body paragraphs */
+
+    /* ==========================================================================
+       5. THE SPACING SYSTEM (8px / 0.5rem Grid Base)
+       ========================================================================== */
+    /* Excellent for padding, margins, gaps, and layouts */
+    --space-xxs: 0.25rem;
+    /* 4px   - Tight label adjustments */
+    --space-xs: 0.50rem;
+    /* 8px   - Small inner padding */
+    --space-sm: 0.75rem;
+    /* 12px  - Button horizontal padding */
+    --space-md: 1.00rem;
+    /* 16px  - Standard card inner padding / list gaps */
+    --space-lg: 1.50rem;
+    /* 24px  - Layout structure gaps */
+    --space-xl: 2.00rem;
+    /* 32px  - Form section grouping gaps */
+    --space-xxl: 3.00rem;
+    /* 48px  - Massive hero display wrappers */
+
+    /* ==========================================================================
+       6. COMPONENT DESIGN SYSTEM TOKENS
+       ========================================================================== */
+    /* Border Radii (Curves) */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    /* Perfect for your .color-card grids */
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    /* For pill buttons / badges */
+
+    /* Shadows (Depth elevations) */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Theme Neutrals */
+    --bg-main: #0b0f19;
+    --bg-card: #161b26;
+    --bg-input: #1f2635;
+    --border-subtle: #2d3648;
+
+    /* Theme Text */
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+
+    /* Interface Accents */
+    --brand-primary: #3b82f6;
+    --brand-hover: #1d4ed8;
+    --brand-success: #10b981;
+    --brand-warning: rgb(255, 0, 0);
+}
+
+/* ==========================================================================
+   2. GLOBAL ELEMENT BASICS
+   ========================================================================== */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: var(--text-base);
+    line-height: 1.5;
+}
+
+/* Common Layout Wrapper */
+.wrapper {
+    max-width: 900px;
+    margin: 0 auto var(--space-xl) auto;
+    padding: 0 var(--space-lg);
+}
+
+h2 {
+    font-size: var(--text-lg);
+    font-weight: 750;
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   3. HEADER & NAVIGATION
+   ========================================================================== */
+header {
+    background-color: var(--bg-card);
+    /* gives nav its own distinct structural panel layer */
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-md) 0;
+    margin-bottom: var(--space-xl);
+}
+
+nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    font-size: var(--text-md);
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 550;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="true"] {
+    color: var(--brand-primary);
+}
+
+/* ==========================================================================
+   4. CONTROL DECK (INPUTS ZONE)
+   ========================================================================== */
+/* Side-by-side Layout for Picker and Input Text Box */
+.controls-deck {
+    display: flex;
+    align-items: flex-end;
+    /* 🌟 Lines up bottoms of inputs perfectly! */
+    gap: var(--space-md);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-sm);
+}
+
+/* Color Picker Adjustments */
+.picker-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#color-picker {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 52px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+#color-picker::-webkit-color-swatch {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+}
+
+/* Input Fields Containers */
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+    /* space between input field and label */
+    font-weight: 600;
+}
+
+/* Dynamic width sizes for clean balance */
+.smart-field {
+    flex-grow: 1;
+    /* lets the paste box expand to fill open spaces elegantly */
+}
+
+#smart-color-input {
+    width: 100%;
+    /* fills its flex layout block container */
+    font-family: var(--font-mono);
+}
+
+.count-field {
+    flex-shrink: 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    padding: 0 var(--space-md);
+    font-size: var(--text-sm);
+    font-family: var(--font-main);
+    height: 48px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="number"] {
+    width: 90px;
+    text-align: center;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    /* clean subtle developer glow */
+}
+
+/* Warning/Message Box styling */
+#message-box {
+    font-size: var(--text-sm);
+    color: var(--brand-warning);
+    font-weight: 550;
+    margin-top: var(--space-xs);
+    min-height: 1.5em;
+    /* Stops layout shifting when empty */
+}
+
+/* ==========================================================================
+   5. PALETTES CANVAS (ROW CONFIGURATIONS)
+   ========================================================================== */
+.color-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.color-card h2 {
+    font-size: var(--text-base);
+    font-weight: 650;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+}
+
+.color-card h2 span {
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin-left: var(--space-xs);
+}
+
+/* The Swatch Grid Layout Row */
+.color-container {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    /* crops color edges inside nicely */
+    border: 1px solid var(--border-subtle);
+}
+
+/* Individual Color Cards generated via JS */
+.color-swatch {
+    flex: 1;
+    /* Makes swatches flex out evenly no matter if count is 3, 5, or 7! */
+    border: 1px solid var(--bg-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xs);
+    text-align: center;
+    box-sizing: border-box;
+    transition: flex-grow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Subtle expand animation on mouse hover */
+.color-swatch:hover {
+    flex-grow: 1.4;
+}
+
+/* Meta Data code label inside swatch */
+.color-swatch span {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    user-select: all;
+    /* Allows developer to click once to highlight code text! */
+}

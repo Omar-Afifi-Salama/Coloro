@@ -1,5 +1,7 @@
+import { Color } from "../models/Color.js";
+
 // aka analogous colors
-export function createAdjacentColorHues(baseHue, numberOfColors, angleBetweenColors) {
+export function createAdjacentColors(baseColor, numberOfColors, angleBetweenColors) {
     numberOfColors = numberOfColors || 5;
     angleBetweenColors = angleBetweenColors || 15;
 
@@ -14,10 +16,10 @@ export function createAdjacentColorHues(baseHue, numberOfColors, angleBetweenCol
 
     const numberOfColorsBehindBase = Math.floor((numberOfColors - 1) / 2);
 
-    let offset = -1 * numberOfColorsBehindBase * angleBetweenColors + baseHue;
+    let offset = -1 * numberOfColorsBehindBase * angleBetweenColors + baseColor.h;
 
     for (let i = 0; i < numberOfColors; i++) {
-        colors.push((offset + 360) % 360);
+        colors.push(new Color(((offset + 360) % 360), baseColor.s, baseColor.l));
         offset += angleBetweenColors;
     }
 

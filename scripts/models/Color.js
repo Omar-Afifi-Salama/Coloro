@@ -1,12 +1,20 @@
 export class Color {
     constructor(h, s, l) {
-        this.h = Math.round(h);
-        this.s = Math.round(s);
-        this.l = Math.round(l);
+        let normalizedHue = Math.round(h) % 360;
+        if (normalizedHue < 0) normalizedHue += 360;
+
+        this.h = normalizedHue;
+
+        this.s = Color._clamp(Math.round(s), 0, 100);
+        this.l = Color._clamp(Math.round(l), 0, 100);
 
         this._rgbCache = null;
         this._hexCache = null;
         this._contrastCache = null;
+    }
+
+    static _clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
     }
 
     static fromHex(hexString) {
@@ -17,9 +25,13 @@ export class Color {
         return Color.fromRgb(r, g, b);
     }
     static fromRgb(r, g, b) {
-        const normR = r / 255;
-        const normG = g / 255;
-        const normB = b / 255;
+        const safeR = Color._clamp(Math.round(r), 0, 255);
+        const safeG = Color._clamp(Math.round(g), 0, 255);
+        const safeB = Color._clamp(Math.round(b), 0, 255);
+
+        const normR = safeR / 255;
+        const normG = safeG / 255;
+        const normB = safeB / 255;
 
         const max = Math.max(normR, normG, normB);
         const min = Math.min(normR, normG, normB);
@@ -40,7 +52,7 @@ export class Color {
     }
     static fromRgbString(rgbString) {
         // Regular expression to strip away characters and pluck the numbers
-        const match = rgbString.match(/\d+/g);
+        const match = rgbString.match(/-?\d+/g);
         if (!match || match.length < 3) return new Color(0, 0, 0);
 
         const [r, g, b] = match.map(Number);
@@ -97,6 +109,12 @@ export class Color {
 
     toHslString() {
         return `hsl(${this.h}, ${this.s}%, ${this.l}%)`;
+    }
+
+    get opposite() {
+        const oppositeHue = (this.h + 180) % 360;
+
+        return new Color(oppositeHue, this.s, this.l);
     }
 
     get contrastColor() {

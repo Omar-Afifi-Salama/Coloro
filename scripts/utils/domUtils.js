@@ -1,35 +1,28 @@
+// utils/domUtils.js
 
-const colorContainer = document.querySelector("#color-container");
-
-export function createColorDiv(HSLString) {
+/** Creates a single styled color swatch element */
+export function createColorDiv(colorInstance, colorName) {
     const div = document.createElement("div");
-    div.classList.add("color");
-    div.style.backgroundColor = HSLString;
+    div.classList.add("color-swatch");
+    div.style.backgroundColor = colorInstance.toHslString();
+
+    const label = document.createElement("span");
+    label.innerText = `${colorName} (${colorInstance.toHexString()})`;
+    label.style.color = colorInstance.contrastColor;
+
+    div.appendChild(label);
     return div;
 }
 
-export function createMultipleColorDivs(HSLStringArray) {
-    const divs = [];
-    HSLStringArray.forEach((HSLString) => {
-        divs.push(createColorDiv(HSLString));
+/** Clears a specific container and paints its unique array of Color objects */
+export function renderPaletteInContainer(colorsArray, containerElement) {
+    if (!containerElement) return;
+
+    // Clear out only this specific section's old swatches
+    containerElement.innerHTML = "";
+
+    colorsArray.forEach((color) => {
+        const swatch = createColorDiv(color);
+        containerElement.appendChild(swatch);
     });
-    return divs;
-}
-
-export function appendColorDiv(div) {
-    colorContainer.appendChild(div);
-}
-
-export function appendMultipleColorDivs(divsArray) {
-    divsArray.forEach((div) => {
-        colorContainer.appendChild(div);
-    })
-}
-
-export function clearColorContainer() {
-    const colors = colorContainer.children;
-    while (colors.length !== 0) {
-        colors[0].remove();
-    }
-    return true;
 }
